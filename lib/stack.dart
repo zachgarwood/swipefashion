@@ -9,17 +9,19 @@ import 'package:swipefashion/item.dart';
     templateUrl: 'stack.html'
 )
 class StackComponent {
-    List<Item> items;
-    Item currentItem;
+    bool itemsLoaded = false;
+    List<Item> _items = new List();
+    final Http _http;
 
-    StackComponent() {
-        items = _loadData();
-        currentItem = items.first;
+    StackComponent(this._http) {
+        _getItems();
     }
 
+    Item get currentItem => _items.first;
+
     void pass() {
-        _getNextItem();
         _addToViewedList(currentItem);
+        _getNextItem();
     }
 
     void like() {
@@ -29,7 +31,7 @@ class StackComponent {
     }
 
     void view() {
-        window.open(currentItem.url, 'external');
+        window.open(currentItem.url, currentItem.name.toLowerCase()..replaceAll(new RegExp(r'\w'), ''));
     }
 
     _addToViewedList(Item item) {
@@ -39,24 +41,22 @@ class StackComponent {
     }
 
     void _getNextItem() {
-        items.remove(currentItem);
-        currentItem = items.first;
+        _items.remove(currentItem);
+        if (_items.isEmpty) {
+            itemsLoaded = false;
+            _getItems();
+        }
     }
 
-    List<Item> _loadData() {
-        return [
-            new Item(
-                'red dress',
-                49.99,
-                'http://met.live.mediaspanonline.com/assets/31069/example-608web_w608.jpg',
-                'http://met.live.mediaspanonline.com/assets/31069/example-608web_w608.jpg'
-            ),
-            new Item(
-                'black dress',
-                69.99,
-                'http://domaingang.com/wp-content/uploads/2012/02/example.png',
-                'http://domaingang.com/wp-content/uploads/2012/02/example.png'
-            ),
-        ];
+    void _getItems() {
+        _http.get('http://private-75680-swipefashion.apiary-mock.com/items')
+            .then((HttpResponse response) {
+                _items = response.data.map((data) => new Item.fromJson(data)).toList();
+                itemsLoaded = true;
+            })
+            .catchError((error) {
+                print(error);
+                _items = new List();
+            });
     }
 }

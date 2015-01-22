@@ -1,8 +1,10 @@
-<a href="{{currentItem.url}}">
-    <h2>{{currentItem.name}}</h2>
-    <img src="{{currentItem.image}}">
-    <p>${{currentItem.price}}</p>
-</a>
-<button ng-click="pass()">Pass</button>
-<button ng-click="view()">Details</button>
-<button ng-click="like()">Like</button>
+<div ng-if="itemsLoaded">
+    <a ng-click="view()">
+        <h2>{{currentItem.name}}</h2>
+        <img src="{{currentItem.image}}">
+        <p>${{currentItem.price}}</p>
+    </a>
+    <button ng-click="pass()">Pass</button>
+    <button ng-click="view()">Details</button>
+    <button ng-click="like()">Like</button>
+</div>
