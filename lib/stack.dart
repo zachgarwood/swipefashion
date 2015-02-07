@@ -3,6 +3,7 @@ library stack;
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:swipefashion/item.dart';
+import 'package:swipefashion/user.dart';
 
 @Component(
     selector: 'stack',
@@ -10,10 +11,12 @@ import 'package:swipefashion/item.dart';
 )
 class StackComponent {
     bool itemsLoaded = false;
-    List<Item> _items = new List();
     final Http _http;
+    List<Item> _items;
+    static const String _url = 'http://private-75680-swipefashion.apiary-mock.com';
+    final User _user;
 
-    StackComponent(this._http) {
+    StackComponent(Http this._http, User this._user) {
         _getItems();
     }
 
@@ -35,6 +38,10 @@ class StackComponent {
     }
 
     _addToViewedList(Item item) {
+        _http.post(_url + '/items/${item.id}/view', '{"user_id": "${_user.id}"')
+            .catchError((error) {
+                print(error);
+            });
     }
 
     _addToLikeList(Item item) {
@@ -49,7 +56,7 @@ class StackComponent {
     }
 
     void _getItems() {
-        _http.get('http://private-75680-swipefashion.apiary-mock.com/items')
+        _http.get(_url + '/items')
             .then((HttpResponse response) {
                 _items = response.data.map((data) => new Item.fromJson(data)).toList();
                 itemsLoaded = true;
