@@ -8,4 +8,11 @@ class User {
     String id;
 
     User(this.id);
+
+    Map toJson() {
+        Map json = new Map();
+        json['user_id'] = id;
+
+        return json;
+    }
 }

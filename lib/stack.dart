@@ -1,6 +1,7 @@
 library stack;
 
 import 'dart:html';
+import 'dart:convert';
 import 'package:angular/angular.dart';
 import 'package:swipefashion/item.dart';
 import 'package:swipefashion/user.dart';
@@ -38,7 +39,8 @@ class StackComponent {
     }
 
     _addToViewedList(Item item) {
-        _http.post(_url + '/items/${item.id}/view', '{"user_id": "${_user.id}"')
+        JsonEncoder json = new JsonEncoder();
+        _http.post(_url + '/items/${item.id}/view', json.convert(_user))
             .catchError((error) {
                 print(error);
             });
