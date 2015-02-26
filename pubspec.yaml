@@ -1,10 +1,13 @@
-name: swipefashion 
+name: swipefashion
 version: 0.1.0
 dependencies:
-    angular: ">=1.0.0 <2.0.0"
-    browser: any
-    web_components: any
+  angular: '>=1.0.0 <2.0.0'
+  browser: any
+  cookie: any
+  lawndart: any
+  uuid: any
+  web_components: any
 transformers:
-    - angular:
-        html_files:
-            - lib/stack.html
+- angular:
+    html_files:
+    - lib/stack.html
