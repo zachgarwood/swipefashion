@@ -1,9 +1,7 @@
 library item;
 
-import 'package:angular/angular.dart';
-
 class Item {
-    String id;
+    int id;
     String name;
     double price;
     String image;
