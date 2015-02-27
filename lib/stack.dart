@@ -7,65 +7,65 @@ import 'package:swipefashion/item.dart';
 import 'package:swipefashion/user.dart';
 
 @Component(
-    selector: 'stack',
-    templateUrl: 'stack.html'
+  selector: 'stack',
+  templateUrl: 'stack.html'
 )
 class StackComponent {
-    bool itemsLoaded = false;
-    final Http _http;
-    List<Item> _items;
-    static const String _url = 'http://private-75680-swipefashion.apiary-mock.com';
-    final User _user;
+  bool itemsLoaded = false;
+  final Http http;
+  List<Item> items;
+  static const String url = 'http://private-75680-swipefashion.apiary-mock.com';
+  final User user;
 
-    StackComponent(Http this._http, User this._user) {
-        _getItems();
+  StackComponent(Http this.http, User this.user) {
+    _getItems();
+  }
+
+  Item get currentItem => items.first;
+
+  void pass() {
+    _addToViewedList(currentItem);
+    _getNextItem();
+  }
+
+  void like() {
+    _addToLikeList(currentItem);
+    _addToViewedList(currentItem);
+    _getNextItem();
+  }
+
+  void view() {
+    window.open(currentItem.url, currentItem.name.toLowerCase()..replaceAll(new RegExp(r'\w'), ''));
+  }
+
+  _addToViewedList(Item item) {
+    JsonEncoder json = new JsonEncoder();
+    http.post(url + '/items/${item.id}/view', json.convert(user))
+      .catchError((error) {
+        print(error);
+      });
+  }
+
+  _addToLikeList(Item item) {
+  }
+
+  void _getNextItem() {
+    items.remove(currentItem);
+    if (items.isEmpty) {
+      itemsLoaded = false;
+      _getItems();
     }
+  }
 
-    Item get currentItem => _items.first;
-
-    void pass() {
-        _addToViewedList(currentItem);
-        _getNextItem();
-    }
-
-    void like() {
-        _addToLikeList(currentItem);
-        _addToViewedList(currentItem);
-        _getNextItem();
-    }
-
-    void view() {
-        window.open(currentItem.url, currentItem.name.toLowerCase()..replaceAll(new RegExp(r'\w'), ''));
-    }
-
-    _addToViewedList(Item item) {
-        JsonEncoder json = new JsonEncoder();
-        _http.post(_url + '/items/${item.id}/view', json.convert(_user))
-            .catchError((error) {
-                print(error);
-            });
-    }
-
-    _addToLikeList(Item item) {
-    }
-
-    void _getNextItem() {
-        _items.remove(currentItem);
-        if (_items.isEmpty) {
-            itemsLoaded = false;
-            _getItems();
-        }
-    }
-
-    void _getItems() {
-        _http.get(_url + '/items')
-            .then((HttpResponse response) {
-                _items = response.data.map((data) => new Item.fromJson(data)).toList();
-                itemsLoaded = true;
-            })
-            .catchError((error) {
-                print(error);
-                _items = new List();
-            });
-    }
+  void _getItems() {
+    http.get(url + '/items')
+      .then((HttpResponse response) {
+        items = response.data.map((data) => new Item.fromJson(data)).toList();
+        itemsLoaded = true;
+      })
+      .catchError((error) {
+        print(error);
+        items = new List();
+      });
+  }
 }
