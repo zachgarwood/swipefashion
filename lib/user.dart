@@ -7,15 +7,21 @@ import 'package:uuid/uuid.dart';
 
 @Injectable()
 class User {
+    static const String userIdKey = 'userId';
     String id;
+    Store store = new Store('SwipeFashion', 'Users');
 
     User() {
-        var store = new Store('SwipeFashion', 'Users');
-        if (id == null) {
-            var uuid = new Uuid();
-            store.open().then((_) => store.save(uuid.v5(Uuid.NAMESPACE_URL, Uri.base.host), 'userId'));
-        }
-        store.open().then((_) => id = store.getByKey('userId'));
+        store.open().then((_) {
+            store.getByKey(userIdKey).then((value) {
+                id = value;
+                if (id == null) {
+                    var uuid = new Uuid();
+                    id = uuid.v5(Uuid.NAMESPACE_URL, Uri.base.host);
+                    store.save(id, userIdKey);
+                }
+            });
+        });
     }
 
     Map toJson() {
