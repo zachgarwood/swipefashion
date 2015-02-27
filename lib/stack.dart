@@ -1,7 +1,7 @@
 library stack;
 
-import 'dart:html';
 import 'dart:convert';
+import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:swipefashion/item.dart';
 import 'package:swipefashion/user.dart';

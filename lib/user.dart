@@ -1,7 +1,6 @@
 library user;
 
 import 'package:angular/angular.dart';
-import 'package:di/annotations.dart';
 import 'package:lawndart/lawndart.dart';
 import 'package:uuid/uuid.dart';
 
