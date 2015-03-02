@@ -1,2 +1,2 @@
-SwipFashion
-===========``
+SwipeFashion
+============
