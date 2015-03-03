@@ -1,0 +1,11 @@
+language: dart
+dart:
+  - stable
+notifications:
+  email: false
+before_deploy: "pub build"
+deploy:
+  provider: divshot
+  api_key: Ze0I79jf95DAehplsAPA9FgYBN-aKMW5V7MKc9SW
+  environment: production
+  skip_cleanup: true
