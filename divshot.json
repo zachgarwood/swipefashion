@@ -1,0 +1,5 @@
+{
+    "name": "swipefashion",
+    "root": "./build/web",
+    "clean_urls": true
+}
