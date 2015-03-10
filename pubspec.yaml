@@ -7,6 +7,8 @@ dependencies:
   uuid: any
   web_components: any
 dev_dependencies:
+  dartmocks: any
+  guinness: any
   unittest: any
 transformers:
 - angular:
