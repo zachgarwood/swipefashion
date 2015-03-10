@@ -1,5 +1,5 @@
 name: swipefashion
-version: 0.1.0
+homepage: swipefashion.com
 dependencies:
   angular: '>=1.0.0 <2.0.0'
   browser: any
@@ -8,7 +8,7 @@ dependencies:
   web_components: any
 dev_dependencies:
   dartmocks: any
-  guinness: any
+  guinness: '>=0.1.5 <0.2.0'
   unittest: any
 transformers:
 - angular:
