@@ -8,7 +8,7 @@ import 'package:swipefashion/user.dart';
 
 @Injectable()
 class PissService {
-  static const String url = 'http://private-75680-swipefashion.apiary-mock.com';
+  static const String url = 'http://private-75680-pissapi.apiary-mock.com';
   final Http _http;
 
   PissService(Http this._http);
