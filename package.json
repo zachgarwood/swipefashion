@@ -1,0 +1,23 @@
+{
+  "name": "swipefashion",
+  "homepage": "http://swipefashion.com",
+  "license": "proprietary",
+  "private": true,
+  "author": {
+    "name": "Zach Garwood",
+    "email": "zachgarwood@gmail.com"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "css-loader": "*",
+    "cucumber": "*",
+    "jsx-loader": "*",
+    "style-loader": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*"
+  },
+  "scripts":{
+    "test": "./node_modules/.bin/cucumber.js"
+  }
+}
