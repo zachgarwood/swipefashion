@@ -7,17 +7,15 @@
     "name": "Zach Garwood",
     "email": "zachgarwood@gmail.com"
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "css-loader": "*",
-    "cucumber": "*",
     "jsx-loader": "*",
+    "react": "~0.13",
     "style-loader": "*",
     "webpack": "*",
     "webpack-dev-server": "*"
   },
   "scripts":{
-    "test": "./node_modules/.bin/cucumber.js"
+    "start": "webpack-dev-server --devtool eval --progress --colors --content-base build/"
   }
 }
