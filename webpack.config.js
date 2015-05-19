@@ -3,7 +3,7 @@ var modules_dir = __dirname + '/node_modules';
 
 var config = {
   entry: {
-    library: [__dirname + '/library/main.jsx'],
+    library: [__dirname + '/library/App.jsx'],
     vendor: []
   },
   output: {
