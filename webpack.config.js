@@ -1,32 +1,35 @@
+var path = require('path');
 var webpack = require('webpack');
-var modules_dir = __dirname + '/node_modules';
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var config = {
+module.exports = {
   entry: {
-    library: [__dirname + '/library/App.jsx'],
-    vendor: []
+    app: './library/App.jsx',
+    vendor: [
+      'backbone',
+      'backbone-react-component',
+      'jquery',
+      'react'
+    ] 
   },
   output: {
-    path: __dirname + '/build',
+    path: path.resolve(__dirname, 'build'),
     filename: 'app.js'
   },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
-  ],
   module: {
     loaders: [ 
-      {test: /\.css$/, loader: 'style-loader!css-loader'},
-      {test: /\.jsx$/, loader: 'jsx-loader'}
+      {test: /\.jsx$/, loader: 'jsx-loader'},
+      {test: /\.scss$/, loader: 'style!css!sass'}
     ],
     noParse: []
   },
-  resolve: { alias: {} },
-  addVendor: function (name, path) {
-    this.resolve.alias[name] = path;
-    this.module.noParse.push(new RegExp('^' + path + '$'));
-    this.entry.vendor.push(name);
-  }
-}
-config.addVendor('react', modules_dir + '/react/dist/react.min.js');
-
-module.exports = config;
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new HtmlWebpackPlugin({
+      hash: true,
+      inject: true,
+      minify: true,
+      template: './library/index.html'
+    })
+  ]
+};

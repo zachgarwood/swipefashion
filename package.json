@@ -8,14 +8,20 @@
     "email": "zachgarwood@gmail.com"
   },
   "devDependencies": {
+    "backbone": "^1.2.0",
+    "backbone-react-component": "^0.8.1",
     "css-loader": "*",
+    "html-webpack-plugin": "^1.4.0",
     "jsx-loader": "*",
-    "react": "~0.13",
+    "react": "^0.13.3",
+    "sass-loader": "*",
     "style-loader": "*",
     "webpack": "*",
+    "http-server": "*",
     "webpack-dev-server": "*"
   },
-  "scripts":{
-    "start": "webpack-dev-server --devtool eval --progress --colors --content-base build/"
+  "scripts": {
+    "start": "webpack-dev-server --devtool eval --progress --colors --hot --config webpack.dev.config.js",
+    "build": "NODE_ENV=production webpack -p"
   }
 }
