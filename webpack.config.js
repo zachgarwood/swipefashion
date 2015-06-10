@@ -4,12 +4,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './library/App.jsx',
+    app: './library/main.js',
     vendor: [
       'backbone',
       'backbone-react-component',
       'jquery',
-      'react'
+      'react',
+      'store',
+      'node-uuid',
     ] 
   },
   output: {
