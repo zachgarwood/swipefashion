@@ -3,9 +3,9 @@ node_js:
 - stable
 notifications:
   email: false
+before_deploy: npm run build
 deploy:
   provider: divshot
   api_key:
     secure: 3bt35fYE9W/wuQAMDl+7EN8P9n2IwfCzkyPdGg+7N6s9WdWMzUgKZ/PURM0lUq/Aat433P+y9I9Ihu73wtEpHrWgWG3OhB2GjttIujZshibjfMPTAxLQ1gieYDPEYJx83IjmEh+JX5YUJeKZDgkc6YzvLEJgNI1fQb/gFt170OM=
   environment: production
-  skip_cleanup: true
