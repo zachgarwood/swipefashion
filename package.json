@@ -7,11 +7,12 @@
     "name": "Zach Garwood",
     "email": "zachgarwood@gmail.com"
   },
-  "devDependencies": {
+  "dependencies": {
     "backbone": "^1.2.0",
     "backbone-react-component": "^0.8.1",
     "css-loader": "*",
     "html-webpack-plugin": "^1.4.0",
+    "jasmine": "*",
     "jsx-loader": "*",
     "jquery": "*",
     "react": "^0.13.3",
@@ -24,6 +25,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --devtool eval --progress --colors --hot --config webpack.dev.config.js",
-    "build": "NODE_ENV=production webpack -p"
+    "build": "NODE_ENV=production webpack -p",
+    "test": "jasmine"
   }
 }
