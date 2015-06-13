@@ -11,8 +11,8 @@ $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 
 var User = Backbone.Model.extend({
   initialize: function() {
-  console.log(Store.get('user_id'));
-    if ((id = Store.get('user_id')) == 'undefined') {
+    id = Store.get('user_id');
+    if (typeof id === 'undefined') {
       id = Uuid.v4();
       Store.set('user_id', id);
     }
